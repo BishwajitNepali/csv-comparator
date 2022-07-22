@@ -31,7 +31,7 @@ public class CsvComparatorTest {
         CsvComparisonOptions options = CsvComparisonOptions
                 .builder()
                 .setColumns(1, 2, 3)
-                .setIdentityColumn(0)
+                .setIdentityColumn(new int[0])
                 .build();
         CsvComparisonResult result = new CsvComparator(source, options).compare();
 
@@ -52,7 +52,7 @@ public class CsvComparatorTest {
         CsvComparisonOptions options = CsvComparisonOptions
                 .builder()
                 .setColumns("email", "firstname", "lastname")
-                .setIdentityColumn("email")
+                .setIdentityColumn(new String[]{"email"})
                 .build();
         CsvComparisonResult result = new CsvComparator(source, options).compare();
 
@@ -72,7 +72,7 @@ public class CsvComparatorTest {
         CsvComparisonOptions options = CsvComparisonOptions
                 .builder()
                 .setColumns(1, 2, 3)
-                .setIdentityColumn(0)
+                .setIdentityColumn(new int[0])
                 .build();
         CsvComparisonResult result = new CsvComparator(source, options).compare();
 
@@ -92,7 +92,7 @@ public class CsvComparatorTest {
         CsvComparisonOptions options = CsvComparisonOptions
                 .builder()
                 .setColumns("email", "firstname", "lastname")
-                .setIdentityColumn(0)
+                .setIdentityColumn(new int[0])
                 .build();
         CsvComparisonResult result = new CsvComparator(source, options).compare();
 

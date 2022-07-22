@@ -95,18 +95,20 @@ public interface CsvComparisonOptions {
          *             {@link #setColumns(String...)}
          * @return {@link CsvComparisonOptions.Builder}
          */
-        public Builder setIdentityColumn(@Nonnull String name) {
-            if (this.selectedColumnNames.length != 0) {
-                checkNotNull(name, "name cannot not be null");
-                this.identityColumnIndex = Arrays.asList(this.selectedColumnNames).indexOf(name);
-            } else {
-                throw new RuntimeException("Please use CsvComparisonOptions.builder().columns(String... names)");
+        public Builder setIdentityColumn(@Nonnull String[] names) {
+            for (String name : names) {
+                if (this.selectedColumnNames.length != 0) {
+                    checkNotNull(name, "name cannot not be null");
+                    this.identityColumnIndex = Arrays.asList(this.selectedColumnNames).indexOf(name);
+                } else {
+                    throw new RuntimeException("Please use CsvComparisonOptions.builder().columns(String... names)");
+                }
             }
             return this;
         }
 
         /**
-         * @param index indicate which is identity column
+         * @param indexes indicate which is identity column
          *              determine which field is unique in a row.
          *              starts with 0 in range of columns by indexes
          *              <p>
@@ -117,13 +119,16 @@ public interface CsvComparisonOptions {
          *              then set {@code CsvComparisonOptions.Builder.identityColumn(0)}
          * @return {@link CsvComparisonOptions.Builder}
          */
-        public Builder setIdentityColumn(int index) {
-            if (index > -1 && index < this.selectedColumnCount) {
-                this.identityColumnIndex = index;
-            } else {
-                throw new RuntimeException(String.format("index should be in range [%s, %s]", 0, selectedColumnCount));
+        public Builder setIdentityColumn(int[] indexes) {
+            for (int index : indexes) {
+                if (index > -1 && index < this.selectedColumnCount) {
+                    this.identityColumnIndex = index;
+                } else {
+                    throw new RuntimeException(String.format("index should be in range [%s, %s]", 0, selectedColumnCount));
+                }
             }
             return this;
+
         }
 
         /**
